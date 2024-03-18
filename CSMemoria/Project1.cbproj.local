@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/01/15 20:07:52.000.617,=C:\Users\carlo\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>2024/01/15 20:07:52.000.638,=C:\Users\carlo\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>2024/01/15 20:08:07.000.435,C:\Users\carlo\Documents\Embarcadero\Studio\Projects\Unit1.cpp=C:\Users\carlo\Desktop\auxil\ed1\verano\asd\Unit1.cpp</Transaction>
+    <Transaction>2024/01/15 20:08:07.000.435,C:\Users\carlo\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\carlo\Desktop\auxil\ed1\verano\asd\Unit1.dfm</Transaction>
+    <Transaction>2024/01/15 20:08:07.000.462,C:\Users\carlo\Documents\Embarcadero\Studio\Projects\Project1.cbproj=C:\Users\carlo\Desktop\auxil\ed1\verano\asd\Project1.cbproj</Transaction>
+    <Transaction>2024/01/15 20:08:07.000.418,C:\Users\carlo\Documents\Embarcadero\Studio\Projects\Project1PCH1.h=C:\Users\carlo\Desktop\auxil\ed1\verano\asd\Project1PCH1.h</Transaction>
+    <Transaction>2024/01/15 20:08:07.000.435,C:\Users\carlo\Documents\Embarcadero\Studio\Projects\Unit1.h=C:\Users\carlo\Desktop\auxil\ed1\verano\asd\Unit1.h</Transaction>
+    <Transaction>2024/01/15 20:10:44.000.774,=C:\Users\carlo\Desktop\auxil\ed1\verano\asd\CSMemoria.cpp</Transaction>
+  </Transactions>
+</BorlandProject>

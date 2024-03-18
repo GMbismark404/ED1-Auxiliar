@@ -1,0 +1,234 @@
+//---------------------------------------------------------------------------
+
+#include <vcl.h>
+#pragma hdrstop
+
+#include "Unit1.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.dfm"
+TForm1 *Form1;
+//---------------------------------------------------------------------------
+__fastcall TForm1::TForm1(TComponent* Owner)
+	: TForm(Owner)
+{
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::Button1Click(TObject *Sender)
+{
+	a = new CSMemoria();
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::Button2Click(TObject *Sender)
+{
+	espacio_actual = a->new_espacio(AnsiString(Edit5->Text).c_str());
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::Button3Click(TObject *Sender)
+{
+	int dir = StrToInt(Edit1->Text);
+	String id = Edit2->Text;
+	int valor = StrToInt(Edit3->Text);
+
+	a->poner_dato(dir,AnsiString(id).c_str(), valor);
+	Form1->Button5Click(nullptr);
+
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::Button4Click(TObject *Sender)
+{
+	int dir = StrToInt(Edit4->Text);
+
+	a->delete_espacio(dir);
+}
+
+void TForm1::PintadoLink(int posX,int posY,int Link){
+	TRect rect(posX,posY,posX+TamanoCelda,posY+TamanoCelda);
+	Form1->Canvas->Brush->Color = clLime;
+	Form1->Canvas->FillRect(rect);
+
+	String link1 = IntToStr(Link);
+
+	Form1->Canvas->TextOutW(posX+2,posY+2,link1);
+}
+void TForm1::PintadoConBorde(int posX, int posY, String cad, TColor color){
+
+	TRect rect(posX,posY,posX+TamanoCeldaX,posY+TamanoCeldaY);
+	Form1->Canvas->Brush->Color = color;
+	Form1->Canvas->FillRect(rect);
+
+	Form1->Canvas->TextOutW(posX+3,posY+3,cad);
+
+	Form1->Canvas->MoveTo(posX,posY);
+	Form1->Canvas->LineTo(posX+TamanoCeldaX,posY);
+	Form1->Canvas->LineTo(posX+TamanoCeldaX, posY+TamanoCeldaY);
+	Form1->Canvas->LineTo(posX,posY+TamanoCeldaY);
+	Form1->Canvas->LineTo(posX,posY);
+	
+}
+void TForm1::Pintado(int posX, int posY, String cad, TColor color){
+
+
+	//           x1  y1    x2                   y2
+	TRect rect(posX,posY,posX+TamanoCeldaX,posY+TamanoCeldaY);
+	Form1->Canvas->Brush->Color = color;
+	Form1->Canvas->FillRect(rect);
+
+	Form1->Canvas->TextOutW(posX+3,posY+3,cad);
+
+
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::Button5Click(TObject *Sender)
+{
+	if(a != NULL){
+		TColor colorFondo = Form1->Color;
+		Form1->Canvas->Brush->Color = colorFondo;
+		Form1->Canvas->FillRect(Form1->ClientRect);
+
+		/*String text = a->mostrar_memoria_str().c_str();
+
+		int posX= 400;
+		int posY= 200;
+
+		while(!text.IsEmpty()){
+			int posNuevaLinea = text.Pos('\n');
+
+
+			String linea;
+			if(posNuevaLinea >0){
+				linea = text.SubString(1, posNuevaLinea -1);
+				text.Delete(1,posNuevaLinea);
+			}else{
+				linea = text;
+				text = "";
+			}
+
+			Form1->Canvas->TextOutW(posX,posY,linea);
+			posY+=Form1->Canvas->TextHeight(linea);
+
+		} */
+
+	   /*	posX = 300;
+		posY = 100;
+		int auxX = posX;
+		int auxY = posY;
+		//DIBUJAMOS CABECERA
+		Pintado(posX,posY,"dir",Form1->Color);
+		posX+=TamanoCeldaX;
+
+		Pintado(posX,posY,"dato",Form1->Color);
+		posX+=TamanoCeldaX;
+
+		Pintado(posX,posY,"id",Form1->Color);
+		posX+=TamanoCeldaX;
+
+		Pintado(posX,posY,"link",Form1->Color);
+		posX= auxX;
+		posY+= TamanoCeldaY;
+
+
+		//CICLO FOR PARA LEER EL VECTOR SIMULACION DE MEMORIA
+		for(int i = 0; i < max_memoria; i++){
+			//Direccion
+			Pintado(posX,posY,IntToStr(i),Form1->Color);
+			posX+=TamanoCeldaX;
+			//Dato
+			PintadoConBorde(posX,posY,IntToStr(a->getDato(i)),clLime);
+			posX+=TamanoCeldaX;
+			//ID
+			PintadoConBorde(posX,posY,a->getId(i).c_str(),clYellow);
+			posX+=TamanoCeldaX;
+			//LINK
+			PintadoConBorde(posX,posY,IntToStr(a->getLink(i)),clYellow);
+			posX=auxX;
+			posY+=TamanoCeldaY;
+		}
+
+		//Form1->Canvas->TextOutW(200,posY+20,"LIBRE: " + IntToStr(a->getLibre()));
+
+		String as = "Libre: " + IntToStr(a->getLibre());
+		Pintado(posX,posY+10,as,Form1->Color);
+												   */
+		posXOcupado = 300;
+		posYOcupado = 100;
+		int auxXOcupado = posXOcupado;
+
+		Pintado(posXOcupado,posYOcupado,"DIR",Form1->Color);
+		posXOcupado+=TamanoCeldaX;
+
+
+		Form1->Canvas->TextOutW(posXOcupado,posYOcupado-35,"ESPACIOS OCUPADOS");
+		Pintado(posXOcupado,posYOcupado,"DATO",Form1->Color);
+		posXOcupado+=TamanoCeldaX;
+
+		Pintado(posXOcupado,posYOcupado,"ID",Form1->Color);
+		posXOcupado+=TamanoCeldaX;
+
+		Pintado(posXOcupado,posYOcupado,"LINK",Form1->Color);
+
+		posXLibre = posXOcupado + TamanoCeldaX + 40;
+		posYLibre = posYOcupado;
+
+		posXOcupado= auxXOcupado;
+		posYOcupado+= TamanoCeldaY;
+
+		for(int i = 0; i < max_memoria; i++){
+			if(a->ocupado(i)){
+				//Direccion
+				PintadoConBorde(posXOcupado,posYOcupado,IntToStr(i),clLime);
+				posXOcupado+=TamanoCeldaX;
+				//Dato
+				PintadoConBorde(posXOcupado,posYOcupado,IntToStr(a->getDato(i)),Form1->Color);
+				posXOcupado+=TamanoCeldaX;
+				//ID
+				PintadoConBorde(posXOcupado,posYOcupado,a->getId(i).c_str(),Form1->Color);
+				posXOcupado+=TamanoCeldaX;
+				//LINK
+				PintadoConBorde(posXOcupado,posYOcupado,IntToStr(a->getLink(i)),Form1->Color);
+				posXOcupado=auxXOcupado;
+				posYOcupado+=TamanoCeldaY;
+			}
+		}
+
+		int auxXLibre = posXLibre;
+
+		Pintado(posXLibre,posYLibre,"DIR",Form1->Color);
+		posXLibre+=TamanoCeldaX;
+
+
+		Form1->Canvas->TextOutW(posXLibre,posYLibre-35,"ESPACIOS LIBRES");
+		Pintado(posXLibre,posYLibre,"DATO",Form1->Color);
+		posXLibre+=TamanoCeldaX;
+
+		Pintado(posXLibre,posYLibre,"ID",Form1->Color);
+		posXLibre+=TamanoCeldaX;
+
+		Pintado(posXLibre,posYLibre,"LINK",Form1->Color);
+		posXLibre= auxXLibre;
+		posYLibre+= TamanoCeldaY;
+
+		for(int i = 0; i < max_memoria; i++){
+			if(!a->ocupado(i)){
+				//Direccion
+				PintadoConBorde(posXLibre,posYLibre,IntToStr(i),clLime);
+				posXLibre+=TamanoCeldaX;
+				//Dato
+				PintadoConBorde(posXLibre,posYLibre,IntToStr(a->getDato(i)),Form1->Color);
+				posXLibre+=TamanoCeldaX;
+				//ID
+				PintadoConBorde(posXLibre,posYLibre,a->getId(i).c_str(),Form1->Color);
+				posXLibre+=TamanoCeldaX;
+				//LINK
+				PintadoConBorde(posXLibre,posYLibre,IntToStr(a->getLink(i)),Form1->Color);
+				posXLibre=auxXLibre;
+				posYLibre+=TamanoCeldaY;
+			}
+		}
+
+        String as = "Libre: " + IntToStr(a->getLibre());
+		Pintado(posXLibre,posYLibre+10,as,Form1->Color);
+
+
+	}
+}
